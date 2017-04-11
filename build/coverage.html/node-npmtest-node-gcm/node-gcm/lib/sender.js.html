@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-node-gcm/node-gcm/lib/sender.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-node-gcm">npmtest-node-gcm (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-node-gcm/node-gcm/lib/sender.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">12.75% <small>(19 / 149)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 87)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">12.75% <small>(19 / 149)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-node-gcm/node-gcm/lib/</a> &#187; sender.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Constants = require('./constants');
+var _ = require('lodash');
+var request = require('request');
+var debug = require('debug')('node-gcm');
+&nbsp;
+<span class="fstat-no" title="function not covered" >function Sender(key, options) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!(this instanceof Sender)) {</span>
+<span class="cstat-no" title="statement not covered" >        return new Sender(key, options);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.key = key;</span>
+<span class="cstat-no" title="statement not covered" >    this.options = options || {};</span>
+}
+&nbsp;
+Sender.prototype.send = <span class="fstat-no" title="function not covered" >function(message, recipient, options, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    if(typeof options == "function") {</span>
+<span class="cstat-no" title="statement not covered" >        callback = options;</span>
+<span class="cstat-no" title="statement not covered" >        options = null;</span>
+    }
+    else <span class="cstat-no" title="statement not covered" >if(!callback) {</span>
+<span class="cstat-no" title="statement not covered" >        callback = <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+    }
+<span class="cstat-no" title="statement not covered" >    options = cleanOptions(options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(message.params &amp;&amp; message.params.data &amp;&amp; message.params.data.from) {</span>
+<span class="cstat-no" title="statement not covered" >        console.warn("Sending a notification with the 'from' data attribute may invoke a 400 Bad Request by FCM.");</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(options.retries == 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.sendNoRetry(message, recipient, callback);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.sendNoRetry(message, recipient, <span class="fstat-no" title="function not covered" >function(err, response, attemptedRegTokens) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+            // Attempt to determine HTTP status code
+<span class="cstat-no" title="statement not covered" >            var statusCode = typeof err === 'number' ? err : (err.code || 0);</span>
+&nbsp;
+            // 4xx error?
+<span class="cstat-no" title="statement not covered" >            if (statusCode &gt; 399 &amp;&amp; statusCode &lt; 500) {</span>
+<span class="cstat-no" title="statement not covered" >                debug("Error 4xx -- no use retrying. Something is wrong with the request (probably authentication?)");</span>
+<span class="cstat-no" title="statement not covered" >                return callback(err);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return retry(self, message, recipient, options, callback);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(!response.results) {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(null, response);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        checkForBadTokens(response.results, attemptedRegTokens, <span class="fstat-no" title="function not covered" >function(err, unsentRegTokens, regTokenPositionMap) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(err) {</span>
+<span class="cstat-no" title="statement not covered" >                return callback(err);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (unsentRegTokens.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                return callback(null, response);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            debug("Retrying " + unsentRegTokens.length + " unsent registration tokens");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            retry(self, message, unsentRegTokens, options, <span class="fstat-no" title="function not covered" >function(err, retriedResponse) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if(err) {</span>
+<span class="cstat-no" title="statement not covered" >                    return callback(null, response);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                response = updateResponse(response, retriedResponse, regTokenPositionMap, unsentRegTokens);</span>
+<span class="cstat-no" title="statement not covered" >                callback(null, response);</span>
+            });
+        });
+    });
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function cleanOptions(options) {</span>
+<span class="cstat-no" title="statement not covered" >    if(!options || typeof options != "object") {</span>
+<span class="cstat-no" title="statement not covered" >        var retries = 5;</span>
+<span class="cstat-no" title="statement not covered" >        if(typeof options == "number") {</span>
+<span class="cstat-no" title="statement not covered" >            retries = options;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            retries: retries,
+            backoff: Constants.BACKOFF_INITIAL_DELAY
+        };
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(typeof options.retries != "number") {</span>
+<span class="cstat-no" title="statement not covered" >        options.retries = 5;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(typeof options.backoff != "number") {</span>
+<span class="cstat-no" title="statement not covered" >        options.backoff = Constants.BACKOFF_INITIAL_DELAY;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (options.backoff &gt; Constants.MAX_BACKOFF_DELAY) {</span>
+<span class="cstat-no" title="statement not covered" >        options.backoff = Constants.MAX_BACKOFF_DELAY;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return options;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function retry(self, message, recipient, options, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    return setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.send(message, recipient, {</span>
+            retries: options.retries - 1,
+            backoff: options.backoff * 2
+        }, callback);
+    }, options.backoff);
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function checkForBadTokens(results, originalRecipients, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var unsentRegTokens = [];</span>
+<span class="cstat-no" title="statement not covered" >    var regTokenPositionMap = [];</span>
+<span class="cstat-no" title="statement not covered" >    for (var i = 0; i &lt; results.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        if (results[i].error === 'Unavailable') {</span>
+<span class="cstat-no" title="statement not covered" >            regTokenPositionMap.push(i);</span>
+<span class="cstat-no" title="statement not covered" >            unsentRegTokens.push(originalRecipients[i]);</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    nextTick(callback, null, unsentRegTokens, regTokenPositionMap);</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function updateResponse(response, retriedResponse, regTokenPositionMap, unsentRegTokens) {</span>
+<span class="cstat-no" title="statement not covered" >    updateResults(response.results, retriedResponse.results, regTokenPositionMap);</span>
+<span class="cstat-no" title="statement not covered" >    updateResponseMetaData(response, retriedResponse, unsentRegTokens);</span>
+<span class="cstat-no" title="statement not covered" >    return response;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function updateResults(results, retriedResults, regTokenPositionMap) {</span>
+<span class="cstat-no" title="statement not covered" >    for(var i = 0; i &lt; results.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        results[regTokenPositionMap[i]] = retriedResults[i];</span>
+    }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function updateResponseMetaData(response, retriedResponse, unsentRegTokens) {</span>
+<span class="cstat-no" title="statement not covered" >    response.success += retriedResponse.success;</span>
+<span class="cstat-no" title="statement not covered" >    response.canonical_ids += retriedResponse.canonical_ids;</span>
+<span class="cstat-no" title="statement not covered" >    response.failure -= unsentRegTokens.length - retriedResponse.failure;</span>
+}
+&nbsp;
+Sender.prototype.sendNoRetry = <span class="fstat-no" title="function not covered" >function(message, recipient, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    if(!callback) {</span>
+<span class="cstat-no" title="statement not covered" >        callback = <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    getRequestBody(message, recipient, <span class="fstat-no" title="function not covered" >function(err, body) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if(err) {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(err);</span>
+        }
+&nbsp;
+        //Build request options, allowing some to be overridden
+<span class="cstat-no" title="statement not covered" >        var request_options = _.defaultsDeep({</span>
+            method: 'POST',
+            headers: {
+                'Authorization': 'key=' + this.key
+            },
+            uri: Constants.GCM_SEND_URI,
+            json: body
+        }, this.options, {
+            timeout: Constants.SOCKET_TIMEOUT
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        request(request_options, <span class="fstat-no" title="function not covered" >function (err, res, resBodyJSON) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                return callback(err);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (res.statusCode &gt;= 500) {</span>
+<span class="cstat-no" title="statement not covered" >                debug('GCM service is unavailable (500)');</span>
+<span class="cstat-no" title="statement not covered" >                return callback(res.statusCode);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (res.statusCode === 401) {</span>
+<span class="cstat-no" title="statement not covered" >                debug('Unauthorized (401). Check that your API token is correct.');</span>
+<span class="cstat-no" title="statement not covered" >                return callback(res.statusCode);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (res.statusCode !== 200) {</span>
+<span class="cstat-no" title="statement not covered" >                debug('Invalid request (' + res.statusCode + '): ' + resBodyJSON);</span>
+<span class="cstat-no" title="statement not covered" >                return callback(res.statusCode);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (!resBodyJSON) {</span>
+<span class="cstat-no" title="statement not covered" >                debug('Empty response received (' + res.statusCode + ' ' + res.statusMessage + ')');</span>
+                // Spoof error code 400 to avoid retrying the request
+<span class="cstat-no" title="statement not covered" >                return callback({error: res.statusMessage, code: 400});</span>
+            }
+<span class="cstat-no" title="statement not covered" >            callback(null, resBodyJSON, body.registration_ids || [ body.to ]);</span>
+        });
+    }.bind(this));
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getRequestBody(message, recipient, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var body = message.toJson();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(typeof recipient == "string") {</span>
+<span class="cstat-no" title="statement not covered" >        body.to = recipient;</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, null, body);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(Array.isArray(recipient)) {</span>
+<span class="cstat-no" title="statement not covered" >        if(!recipient.length) {</span>
+<span class="cstat-no" title="statement not covered" >            return nextTick(callback, 'No recipient provided!');</span>
+        }
+        else <span class="cstat-no" title="statement not covered" >if(recipient.length == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            body.to = recipient[0];</span>
+<span class="cstat-no" title="statement not covered" >            return nextTick(callback, null, body);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        body.registration_ids = recipient;</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, null, body);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (typeof recipient == "object") {</span>
+<span class="cstat-no" title="statement not covered" >        return extractRecipient(recipient, <span class="fstat-no" title="function not covered" >function(err, recipient) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(err) {</span>
+<span class="cstat-no" title="statement not covered" >                return callback(err);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (Array.isArray(recipient)) {</span>
+<span class="cstat-no" title="statement not covered" >                body.registration_ids = recipient;</span>
+<span class="cstat-no" title="statement not covered" >                return callback(null, body);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if ((/\|\||&amp;&amp;/).test(recipient)) {</span>
+<span class="cstat-no" title="statement not covered" >              body.condition = recipient;</span>
+<span class="cstat-no" title="statement not covered" >              return callback(null, body);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            body.to = recipient;</span>
+<span class="cstat-no" title="statement not covered" >            return callback(null, body);</span>
+        });
+    }
+<span class="cstat-no" title="statement not covered" >    return nextTick(callback, 'Invalid recipient (' + recipient + ', type ' + typeof recipient + ') provided!');</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function nextTick(func) {</span>
+<span class="cstat-no" title="statement not covered" >    var args = Array.prototype.slice.call(arguments, 1);</span>
+<span class="cstat-no" title="statement not covered" >    process.nextTick(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        func.apply(this, args);</span>
+    }.bind(this));
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function extractRecipient(recipient, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var recipientKeys = Object.keys(recipient);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(recipientKeys.length !== 1) {</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, new Error("Please specify exactly one recipient key (you specified [" + recipientKeys + "])"));</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var key = recipientKeys[0];</span>
+<span class="cstat-no" title="statement not covered" >    var value  = recipient[key];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(!value) {</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, new Error("Falsy value for recipient key '" + key + "'."));</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var keyValidators = {</span>
+        to: isString,
+        topic: isString,
+        condition: isString,
+        notificationKey: isString,
+        registrationIds: isArray,
+        registrationTokens: isArray
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var validator = keyValidators[key];</span>
+<span class="cstat-no" title="statement not covered" >    if(!validator) {</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, new Error("Key '" + key + "' is not a valid recipient key."));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(!validator(value)) {</span>
+<span class="cstat-no" title="statement not covered" >        return nextTick(callback, new Error("Recipient key '" + key + "' was provided as an incorrect type."));</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return nextTick(callback, null, value);</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isString(x) {</span>
+<span class="cstat-no" title="statement not covered" >    return typeof x == "string";</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isArray(x) {</span>
+<span class="cstat-no" title="statement not covered" >    return Array.isArray(x);</span>
+}
+&nbsp;
+module.exports = Sender;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 14:00:02 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
