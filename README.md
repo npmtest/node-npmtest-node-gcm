@@ -1,4 +1,7 @@
-# test coverage for  [node-gcm (v0.14.5)](https://github.com/ToothlessGear/node-gcm)  [![npm package](https://img.shields.io/npm/v/npmtest-node-gcm.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-node-gcm) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-node-gcm.svg)](https://travis-ci.org/npmtest/node-npmtest-node-gcm)
+# npmtest-node-gcm
+
+#### basic test coverage for  [node-gcm (v0.14.6)](https://github.com/ToothlessGear/node-gcm)  [![npm package](https://img.shields.io/npm/v/npmtest-node-gcm.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-node-gcm) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-node-gcm.svg)](https://travis-ci.org/npmtest/node-npmtest-node-gcm)
+
 #### Easy interface for Google's Cloud Messaging service (now Firebase Cloud Messaging)
 
 [![NPM](https://nodei.co/npm/node-gcm.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/node-gcm)
@@ -190,8 +193,8 @@
         "test": "test"
     },
     "dist": {
-        "shasum": "37cc5b364c6e4458b610ffad603eb05d620b9eb5",
-        "tarball": "https://registry.npmjs.org/node-gcm/-/node-gcm-0.14.5.tgz"
+        "shasum": "a0172e50c616b28fef7549f08d1caae0ed8c0d99",
+        "tarball": "https://registry.npmjs.org/node-gcm/-/node-gcm-0.14.6.tgz"
     },
     "engines": {
         "node": ">= 0.10.0"
@@ -200,7 +203,7 @@
         "index.js",
         "lib/"
     ],
-    "gitHead": "ef76cce1c197f4b7ee4360707f77e9afc9d537a1",
+    "gitHead": "87a8c905aef7ecb186afbe91c2abd6c269b73fb7",
     "homepage": "https://github.com/ToothlessGear/node-gcm",
     "keywords": [
         "google",
@@ -239,7 +242,8 @@
     "scripts": {
         "test": "mocha test/**/*Spec.js"
     },
-    "version": "0.14.5"
+    "version": "0.14.6",
+    "bin": {}
 }
 ```
 
